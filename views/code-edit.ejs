@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FC월드</title>
+    <link href="/main.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+
+   
+<body class="grey-bg">
+    <%- include('nav-login.ejs') %>
+    
+
+    <form class="form-box" action="/code/edit?_method=PUT" method="POST">
+        <h4>수정하기</h4>
+        <input name= "id" value="<%= result._id %>" style="display: none;">
+        <input name = "title" value="<%= result.title %>">
+        <!-- <input name = "content" value="<%= result.content %>"> -->
+        <textarea name="content" style = "width: 100%; height: 200px;"><%= result.content %> </textarea>
+        <button class="btn btn-primary" type="submit">저장</button>
+        <button class="btn btn-light" onclick="location.href='/code/list';">뒤로가기</button>
+    </form> 
+  </body>
+</html>

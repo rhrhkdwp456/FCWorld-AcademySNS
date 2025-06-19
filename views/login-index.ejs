@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FC월드</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="/main.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+</head>
+<body class="all">
+    <div><%- include('nav-login.ejs') %></div>
+    <div class="grey-bg">  
+        <div class="white-bg">
+            <div>
+                <h2 style="font-weight: bold; padding-top: 30px;"><a href="/post/list"
+                        style="text-decoration: none; color: #2978B5;">FC Stagram</a></h2>
+                <br>
+            </div>
+            <div class="rank-table">
+                <div class="container">
+                    <header>
+                        <h1>브롤 랭킹</h1>
+                    </header>
+                    <br>
+                    <table class="ranking-table">
+                        <thead>
+                            <tr>
+                                <th>순위</th>
+                                <th>이름</th>
+                                <th>트로피(만 단위)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>성준서</td>
+                                <td>4</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>폴티처</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>김준서</td>
+                                <td>3</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>조재훈</td>
+                                <td>3</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>배상원</td>
+                                <td>4</td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>김규담</td>
+                                <td>4</td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td>최승우</td>
+                                <td>4</td>
+                            </tr>
+                            <tr>
+                                <td>8</td>
+                                <td>정연창</td>
+                                <td>2</td>
+                            </tr>
+                            <tr>
+                                <td>9</td>
+                                <td>배서우</td>
+                                <td>2</td>
+                            </tr>
+                            <tr>
+                                <td>10</td>
+                                <td>우세준</td>
+                                <td>2</td>
+                            </tr>
+                            <tr>
+                                <td>11</td>
+                                <td>강태인</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>12</td>
+                                <td>김민재</td>
+                                <td>2</td>
+                            </tr>
+                            <tr>
+                                <td>13</td>
+                                <td>강라현</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>14</td>
+                                <td>김도한</td>
+                                <td>2</td>
+                            </tr>
+                            <tr>
+                                <td>15</td>
+                                <td>이준우</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>16</td>
+                                <td>이채우</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>17</td>
+                                <td>오지훈</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>18</td>
+                                <td>백시우</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>19</td>
+                                <td>박범준</td>
+                                <td>1</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+</body>
+
+
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+<style>
+    /* 기본 스타일 초기화 */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    /* 배경 및 폰트 설정 */
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f4f4f4;
+        display: flex;
+        justify-content: center;
+        animation: fadeIn 1s ease-out;
+        /* 페이지 로드 시 페이드인 애니메이션 */
+    }
+
+    /* 컨테이너 스타일 */
+    .container {
+
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        /* width: 80%; */
+        /* max-width: 600px; */
+        text-align: center;
+        animation: slideUp 0.5s ease-out;
+        /* 컨테이너 슬라이드 업 애니메이션 */
+    }
+
+    /* 헤더 스타일 */
+    header h1 {
+        font-size: 2.5rem;
+        color: #333;
+        margin-bottom: 20px;
+        animation: fadeIn 1s ease-out;
+        /* 헤더 애니메이션 */
+    }
+
+    /* 테이블 스타일 */
+    .ranking-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        opacity: 0;
+        animation: tableFadeIn 1s forwards;
+        /* 테이블 등장 애니메이션 */
+    }
+
+    .ranking-table th,
+    .ranking-table td {
+        padding: 10px;
+        text-align: center;
+        font-size: 1.2rem;
+    }
+
+    .ranking-table th {
+        background-color: #2978B5;
+        color: white;
+    }
+
+    .ranking-table tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    .ranking-table tr:hover {
+        background-color: #ddd;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        /* 마우스 오버 시 부드러운 색상 변화 */
+    }
+
+    /* 순위 컬럼 색상 */
+    .ranking-table td:first-child {
+        font-weight: bold;
+        color: #2978B5;
+    }
+
+    /* 애니메이션 정의 */
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+
+    @keyframes slideUp {
+        0% {
+            transform: translateY(50px);
+        }
+
+        100% {
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes tableFadeIn {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+</style>
+</body>
+
+</html>

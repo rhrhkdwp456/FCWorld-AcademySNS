@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FC월드</title>
+    <link href="/main.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+
+
+
+<body class="grey-bg">
+    <%- include('nav-back.ejs') %>
+
+    <div class="detail-bg">
+      <div class="chat-screen">
+        <% for(let i =0; i< chatcontent.length; i++){ %>
+          <% if(JSON.stringify(chatcontent[i].writer) == JSON.stringify(user) ){ %>
+            <div class="chat-name mine"><span><%= myname %></span></div>
+            <div class="chat-container mine">
+              <div class="chat-box date-mine"><%= chatcontent[i].time %></div>
+              <div class="chat-box" ><span><%= chatcontent[i].content %></span></div>
+            </div>
+            
+            
+          <% } else{ %>
+            <div class="chat-name"><span><%= opponent %></span></div>
+            <div class="chat-container">
+              <div class="chat-box"><span><%= chatcontent[i].content %></span></div>
+              <div class="chat-box date-you"><%= chatcontent[i].time %></div>
+            </div>
+          <% } %>
+        <% } %>
+
+      </div>
+    </div>
+    <div class="chat-form">
+      <input class="chat-input" onkeyup="enterkey()">
+      <button class="chat-button">전송</button>
+    </div> 
+    <!-- socket 셋팅 -->
+    <script src="https://cdn.jsdelivr.net/npm/socket.io@4.7.2/client-dist/socket.io.min.js"></script>
+    <script>
+      function escapeHTML(str) {
+        const escapeChars = {
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#039;'
+        };
+        return str.replace(/[&<>"']/g, match => escapeChars[match]);
+      }
+
+      window.scrollTo(0, document.body.scrollHeight);
+      const socket = io() // 유저 웹소켓 연결하게 하는 코드
+      // socket.emit('age', '28') // 데이터 전송 [유저 -> 서버]
+
+      socket.emit('ask-join', '<%= result._id %>') // 서버에게 룸에 조인시켜달라고 요청.
+
+
+      // 유저가 특정 룸에 메세지 보내는 방법.
+      // 1. 서버에게 룸에 메세지 전달하라고 부탁.
+      // 2. 서버는 부탁받으면 룸에 메세지 뿌림.
+
+      // 전송 버튼 누르면 서버에게 부탁.
+      document.querySelector('.chat-button').addEventListener('click', function(){
+        let msg = document.querySelector('.chat-input').value
+          if(msg == ""){
+            alert("내용을 입력하여 주세요.");
+            return;
+          }
+          socket.emit('message', { msg : msg , room : '<%= result._id %>'})
+      })
+
+      // 문자 내용에서 enter 키 누르는 경우 똑같이 메세지 룸에 전달.
+      function enterkey(){
+        if(window.event.keyCode==13){
+          const msg = document.querySelector('.chat-input').value
+          if(msg == ""){
+            alert("내용을 입력해주세요.");
+            return;
+          }
+          socket.emit('message', { msg : msg , room : '<%= result._id %>'})
+        }
+      }
+      
+
+      // 유저가 룸 메세지 수신하는 법.
+      socket.on('broadcast', (data)=>{
+        // 내가 처음 시도한 방법
+        // const newChat = document.createElement('div')
+        // const newChatspan = document.createElement('span')
+        // const newText = document.createTextNode(data)
+        // newChat.className = 'chat-box'
+        // newChat.classList.add('mine') 
+        // newChat.appendChild(newChatspan)
+        // newChatspan.appendChild(newText)
+        // // document.querySelector('.chat-screen').classList.add('chat-box')
+        // document.querySelector('.chat-screen').appendChild(newChat)
+
+
+
+        // 위에서한 저 ㅈㄹ을 한번에 해결 하는 방법
+        // .chat-screen 찾아서 그거 끝나기 전에다가 html 추가하는 코드인듯. ` `(backtick) 표시 안에 넣으면 문자 중간에 변수값도 넣을 수 있음 그래서 ${data} 요런식으로 사용 가능
+        
+        
+        // 만일 내가 보낸 데이터를 수신한거면 mine 붙이고 그게 아닌경우는 안붙이도록 조건문 짜야됨.
+        if(JSON.stringify(data.user) == JSON.stringify("<%=user%>")){
+          document.querySelector('.chat-screen').insertAdjacentHTML('beforeend', `<div class="chat-name   mine"><span><%= myname %></span></div><div class="chat-container mine">
+              <div class="chat-box date-mine">${data.time}</div>
+              <div class="chat-box" ><span>${escapeHTML(data.data)}</span></div>
+            </div>`)
+          document.querySelector('.chat-input').value = "";
+          window.scrollTo(0, document.body.scrollHeight);
+        }
+        else{
+          document.querySelector('.chat-screen').insertAdjacentHTML('beforeend', `<div class="chat-name"><span><%= opponent %></span></div><div class="chat-container">
+              <div class="chat-box"><span>${data.data}</span></div>
+              <div class="chat-box date-you">${escapeHTML(data.time)}</div>
+            </div>`)
+          window.scrollTo(0, document.body.scrollHeight);
+        }
+        
+      })
+
+
+      
+
+      // 서버가 보낸 데이터 받는 방법.
+      // socket.on('name', (data)=>{
+      //   console.log(data)
+      // })
+
+
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html>
