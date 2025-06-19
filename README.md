@@ -35,7 +35,7 @@ node server.js
 4. 웹 브라우저에서 http://localhost:3000 접속.
 5. 아래 제공되는 테스트 아이디와 비밀번호로 로그인.
 
-## 실제 사이트 주소
+## 사이트 주소
 - 주소: https://fcworld.firstcoding.kr
 - 테스트ID : test
 - password : 12341234
