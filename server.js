@@ -117,8 +117,6 @@ connectDB.then((client)=>{
 
 
 // 세션 데이터를 DB에 저장하려면 connect-mongo 라이브러리 설치
-// npm install bcrypt -> 해슁을 하기 위해서 사용하는 라이브러리 bcrypt 설치
-
 
 // 필요한 라이브러리 npm install express-session passport passport-local 
 // passport는 회원인증 도와주는 메인라이브러리,
@@ -190,9 +188,7 @@ app.get('/home', async(요청,응답)=>{
 
 // 로그인 관련 기능
 app.get('/login',checkLogin, async(요청,응답)=>{
-
     응답.render('login.ejs')
-
 })
 
 app.post('/login', async(요청,응답, next)=>{
@@ -228,7 +224,7 @@ app.get('/register' , (요청, 응답)=>{
 
 
 app.post('/register' , async(요청, 응답)=>{
-
+  
     let 해시 = await bcrypt.hash(요청.body.password, 10)
     // 기존의 비밀번호를 해싱을 해서 암호화 하는 작업.
     let result = await db.collection('user').findOne({ userid : 요청.body.userid })  
@@ -291,11 +287,9 @@ app.use('/', require('./routes/manage.js'))
 // await db.collection('post').updateOne({ _id : 1 }, {$inc : {like : 2}}) // inc -> 값을 + - 하는 문법
 // 동시에 여러개 document 수정 하는방법.
 // await db.collection('post').updateMany({ _id : 1 }, {$inc : {like : 2}})
-
 // like 항목이 10 이상인 document 전부 수정 하는 방법
 // await db.collection('post').updateMany({ like : {$gt :10} }, {$inc : {like : 2}}) 
 // $gt : 10 -> like 항목이 10 이상인가 $lt는 이하 $ne는 not 효과
-
 
 
 // 채팅 관련 기능
